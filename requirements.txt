@@ -1,0 +1,1 @@
+git+https://github.com/theforeman/obal.git@master#egg=obal
