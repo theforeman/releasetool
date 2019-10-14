@@ -1,8 +1,9 @@
 ---
 - hosts:
-    - localhost
+    - projects
   connection: local
+  gather_facts: false
   tasks:
     - name: test
       debug:
-        msg: test
+        var: hostvars[inventory_hostname]

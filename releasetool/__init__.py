@@ -17,6 +17,13 @@ class ApplicationConfig(obal.ApplicationConfig):
         return 'releasetool'
 
     @staticmethod
+    def target_name():
+        """
+        Return the name of the target in the playbook if the playbook takes a parameter.
+        """
+        return 'projects'
+
+    @staticmethod
     def data_path():
         """
         Return the data path. Houses playbooks and configs.
