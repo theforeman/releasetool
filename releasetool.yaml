@@ -1,0 +1,45 @@
+---
+projects:
+  vars:
+    server_oses:
+      - rhel7
+    client_oses:
+      - rhel5
+      - rhel6
+      - rhel7
+      - sles11
+      - sles12
+      - fedora28
+      - fedora29
+    signer: packages@theforeman.org
+    tar_projects: []
+    rpm_packages: []
+    ror_base_tag: ''
+
+  children:
+    foreman: {}
+    katello: {}
+    pulp: {}
+
+foreman:
+  vars:
+    tar_projects:
+      - foreman
+      - foreman-proxy
+      - foreman-installer
+      - foreman-selinux
+    rpm_packages:
+      - foreman
+      - foreman-installer
+      - foreman-proxy
+      - foreman-release
+      - foreman-selinux
+    ror_base_tag: "foreman-rails-{{ foreman_version }}"
+  hosts:
+    foreman-1.23:
+      foreman_version: '1.23'
+
+katello:
+  hosts:
+    katello-3.13: {}
+...
