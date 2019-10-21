@@ -15,6 +15,7 @@ projects:
     tar_projects: []
     rpm_packages: []
     ror_base_tag: ''
+    artifact_strategy: 'rake'
 
   children:
     foreman: {}
@@ -44,6 +45,8 @@ foreman:
 
 
 katello:
+  vars:
+    artifact_strategy: 'gem'
   hosts:
     katello-3.13:
       foreman_version: '1.23'
