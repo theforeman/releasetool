@@ -5,8 +5,17 @@
   with_items:
     - "{{ download_tags }}"
 
+- name: filter koji result
+  set_fact:
+    koji_list_filtered: "{{ koji_list.results | map(attribute='stdout_lines') | flatten | map('regex_replace', '\\.src$') | list }}"
+
+- name: select rpms from the koji output
+  set_fact:
+    all_rpms: "{{ koji_list_filtered | map('regex_replace', '^.* ') | list | unique }}"
+    signed_rpms: "{{ koji_list_filtered | select('match', gpg_id~' ') | map('regex_replace', '^.* ') | list | unique }}"
+
 - name: debug
   debug:
     msg: "{{ item }}"
-  loop: "{{ koji_list.results | map(attribute='stdout_lines') | flatten | map('regex_replace', '\\.src$') | list }}"
+  loop: "{{ all_rpms | difference(signed_rpms) }}"
 ...
