@@ -14,7 +14,8 @@ projects:
     signer: packages@theforeman.org
     tar_projects: []
     rpm_packages: []
-    ror_base_tag: ''
+    server_tags: []
+    client_tags: []
     artifact_strategy: 'rake'
 
   children:
@@ -35,10 +36,15 @@ foreman:
       - foreman-proxy
       - foreman-release
       - foreman-selinux
-    ror_base_tag: "foreman-rails-{{ foreman_version }}"
+    server_tags:
+      - "foreman-{{ version }}-{{ os_version }}"
+      - "foreman-{{ version }}-nonscl-{{ os_version }}"
+      - "foreman-rails-{{ version }}-{{ os_version }}"
+    client_tags:
+      - "foreman-client-{{ version }}-{{ os_version }}"
   hosts:
     foreman-1.23:
-      foreman_version: '1.23'
+      version: '1.23'
       full_version: '1.23.0'
       gpg_key: '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
       gpg_id: '7b5b366a'
@@ -47,9 +53,13 @@ foreman:
 katello:
   vars:
     artifact_strategy: 'gem'
+    server_tags:
+      - "katello-{{ version }}-{{ os_version }}"
+      - "katello-{{ version }}-thirdparty-candlepin-{{ os_version }}"
   hosts:
     katello-3.13:
       foreman_version: '1.23'
+      version: '3.13'
       full_version: '3.13.0'
       gpg_key: '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
       gpg_id: '7b5b366a'
