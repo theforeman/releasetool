@@ -2,8 +2,7 @@
 - name: list {{ os_version }} RPMs from Koji
   command: koji list-tagged --latest --quiet --inherit --sigs --arch=src {{ item }}
   register: koji_list
-  with_items:
-    - "{{ download_tags }}"
+  loop: "{{ koji_tags }}"
 
 - name: filter koji result
   set_fact:
@@ -14,8 +13,7 @@
     all_rpms: "{{ koji_list_filtered | map('regex_replace', '^.* ') | list | unique }}"
     signed_rpms: "{{ koji_list_filtered | select('match', gpg_id~' ') | map('regex_replace', '^.* ') | list | unique }}"
 
-- name: debug
-  debug:
-    msg: "{{ item }}"
+- name: download rpms
+  command: koji download-build --debuginfo {{ item }}
   loop: "{{ all_rpms | difference(signed_rpms) }}"
 ...

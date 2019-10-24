@@ -1,8 +1,6 @@
 ---
 - name: fetch tag content from koji
   include_tasks: download.yaml
-  vars:
-    download_tags: "{{ koji_tags }}"
   loop: "{{ oses }}"
   loop_control:
     loop_var: os_version
