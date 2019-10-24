@@ -8,6 +8,7 @@ projects:
     rpm_packages: []
     koji_tags: []
     artifact_strategy: 'rake'
+    work_dir: "{{ inventory_dir }}/releases/{{ inventory_hostname }}"
 
   children:
     foreman: {}

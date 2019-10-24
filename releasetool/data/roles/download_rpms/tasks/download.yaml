@@ -15,5 +15,7 @@
 
 - name: download rpms
   command: koji download-build --debuginfo {{ item }}
+  args:
+    chdir: "{{ work_dir }}/rpms"
   loop: "{{ all_rpms | difference(signed_rpms) }}"
 ...
