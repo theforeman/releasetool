@@ -1,0 +1,4 @@
+---
+- name: sign rpms
+  command: "rpmsign --addsign --define '_gpg_path $KEYDIR' --define '_gpg_name {{ signer }}' {{ item }}"
+...
