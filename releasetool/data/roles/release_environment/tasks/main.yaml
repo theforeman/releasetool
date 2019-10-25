@@ -1,8 +1,12 @@
 ---
-- name: ensure {{ work_dir }}
+- name: prepare work directories
   file:
-    path: "{{ work_dir }}"
+    path: "{{ item }}"
     state: directory
+  loop:
+    - "{{ work_dir }}"
+    - "{{ work_dir_rpm }}"
+    - "{{ work_dir_gpg }}"
 
 - name: ensure {{ work_dir_rpm }}
   file:
