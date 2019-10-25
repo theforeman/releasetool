@@ -1,9 +1,4 @@
 ---
-- name: ensure {{ work_dir }}/rpms
-  file:
-    path: "{{ work_dir }}/rpms"
-    state: directory
-
 - name: fetch tag content from koji
   include_tasks: download.yaml
   loop: "{{ oses }}"

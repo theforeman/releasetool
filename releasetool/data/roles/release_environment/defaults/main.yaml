@@ -1,0 +1,3 @@
+---
+work_dir: "{{ inventory_dir }}/releases/{{ inventory_hostname }}"
+work_dir_rpm: "{{ work_dir }}/rpms"
