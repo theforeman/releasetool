@@ -1,0 +1,6 @@
+---
+- name: get gpg passphrase
+  command: gopass show -c '{{ pass_name_gpg }}'
+
+- name: import gpg key
+  shell: "gopass show '{{ pass_name_key }}' | gpg2 --homedir '{{ work_dir_gpg }}' --import"
