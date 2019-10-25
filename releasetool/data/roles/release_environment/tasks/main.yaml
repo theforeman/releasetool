@@ -3,6 +3,7 @@
   file:
     path: "{{ item }}"
     state: directory
+    mode: '0700'
   loop:
     - "{{ work_dir }}"
     - "{{ work_dir_rpm }}"
