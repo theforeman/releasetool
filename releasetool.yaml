@@ -17,6 +17,18 @@ projects:
     katello: {}
     client: {}
     pulp: {}
+    keys: {}
+
+keys:
+  children:
+    key_1_23:
+      vars:
+        gpg_key: '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
+        gpg_id: '7b5b366a'
+      hosts:
+        foreman-1.23: {}
+        client-1.23: {}
+        katello-3.13: {}
 
 foreman:
   vars:
@@ -40,8 +52,6 @@ foreman:
     foreman-1.23:
       version: '1.23'
       full_version: '1.23.0'
-      gpg_key: '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
-      gpg_id: '7b5b366a'
 
 
 katello:
@@ -59,8 +69,6 @@ katello:
       foreman_version: '1.23'
       version: '3.13'
       full_version: '3.13.0'
-      gpg_key: '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
-      gpg_id: '7b5b366a'
 
 client:
   vars:
@@ -78,6 +86,4 @@ client:
     client-1.23:
       version: '1.23'
       full_version: '1.23.0'
-      gpg_key: '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
-      gpg_id: '7b5b366a'
 ...
