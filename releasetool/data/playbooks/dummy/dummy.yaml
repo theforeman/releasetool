@@ -3,6 +3,8 @@
     - projects
   connection: local
   gather_facts: false
+  roles:
+    - role: release_environment
   tasks:
     - name: test
       debug:
