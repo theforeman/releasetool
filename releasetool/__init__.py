@@ -50,7 +50,7 @@ class ApplicationConfig(obsah.ApplicationConfig):
             if not os.path.isabs(path):
                 # this is essentially a workaround for
                 # https://github.com/pytest-dev/pytest-xdist/issues/414
-                distribution = pkg_resources.get_distribution('obal')
+                distribution = pkg_resources.get_distribution('releasetool')
                 path = os.path.join(distribution.location, path)
 
         return path
