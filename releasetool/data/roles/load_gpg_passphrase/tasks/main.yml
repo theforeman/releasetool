@@ -1,4 +1,5 @@
 ---
 - name: get gpg passphrase
   command: gopass show -c '{{ pass_name_gpg }}'
+  changed_when: false
 ...
