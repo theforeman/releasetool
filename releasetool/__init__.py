@@ -1,10 +1,19 @@
+#!/usr/bin/env python2
+# PYTHON_ARGCOMPLETE_OK
+
+"""
+releasetool helps to do Foreman releases
+"""
+
+from __future__ import print_function
+
 import os
-import obal
+import obsah
 
-from pkg_resources import resource_filename
+import pkg_resources
 
 
-class ApplicationConfig(obal.ApplicationConfig):
+class ApplicationConfig(obsah.ApplicationConfig):
     """
     A class describing the where to find various files
     """
@@ -24,11 +33,27 @@ class ApplicationConfig(obal.ApplicationConfig):
         return 'projects'
 
     @staticmethod
+    def metadata_name():
+        """
+        Return the name of the metadata file.
+        """
+        return 'metadata.obal.yaml'
+
+    @staticmethod
     def data_path():
         """
         Return the data path. Houses playbooks and configs.
         """
-        return os.environ.get('OBAL_DATA', resource_filename(__name__, 'data'))
+        path = os.environ.get('OBAL_DATA')
+        if path is None:
+            path = pkg_resources.resource_filename(__name__, 'data')
+            if not os.path.isabs(path):
+                # this is essentially a workaround for
+                # https://github.com/pytest-dev/pytest-xdist/issues/414
+                distribution = pkg_resources.get_distribution('obal')
+                path = os.path.join(distribution.location, path)
+
+        return path
 
     @staticmethod
     def inventory_path():
@@ -38,8 +63,11 @@ class ApplicationConfig(obal.ApplicationConfig):
         return os.environ.get('OBAL_INVENTORY', os.path.join(os.getcwd(), 'releasetool.yaml'))
 
 
-def main():
-    obal.main(application_config=ApplicationConfig)
+def main(cliargs=None, application_config=ApplicationConfig):  # pylint: disable=R0914
+    """
+    Main command
+    """
+    obsah.main(cliargs=cliargs, application_config=application_config)
 
 
 if __name__ == '__main__':
