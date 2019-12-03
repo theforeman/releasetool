@@ -19,7 +19,7 @@ The `releasetool.yaml` file contains the project definitions and their configura
 
 At the top level, there are the various projects we support (Foreman, Katello, Pulp) and default variables that apply to all projects.
 
-Each project can later define own, project-specific, settings. The last level is the versioned project definition, which usually will just inherit from the main project definition and define version-specific data (the version itself and the signing key).
+Each project can later define their own, project-specific, settings. The last level is the versioned project definition, which usually will just inherit from the main project definition and define version-specific data (the version itself and the signing key).
 
 ## Usage
 
