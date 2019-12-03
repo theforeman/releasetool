@@ -1,7 +1,7 @@
 ---
 projects:
   vars:
-    oses:
+    operating_systems:
       - rhel7
     signer: packages@theforeman.org
     tar_projects: []
@@ -71,7 +71,7 @@ katello:
 
 client:
   vars:
-    oses:
+    operating_systems:
       - rhel5
       - rhel6
       - rhel7
