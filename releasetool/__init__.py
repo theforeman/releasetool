@@ -37,14 +37,12 @@ class ApplicationConfig(obsah.ApplicationConfig):
         """
         Return the data path. Houses playbooks and configs.
         """
-        path = os.environ.get('OBAL_DATA')
-        if path is None:
-            path = pkg_resources.resource_filename(__name__, 'data')
-            if not os.path.isabs(path):
-                # this is essentially a workaround for
-                # https://github.com/pytest-dev/pytest-xdist/issues/414
-                distribution = pkg_resources.get_distribution('releasetool')
-                path = os.path.join(distribution.location, path)
+        path = pkg_resources.resource_filename(__name__, 'data')
+        if not os.path.isabs(path):
+            # this is essentially a workaround for
+            # https://github.com/pytest-dev/pytest-xdist/issues/414
+            distribution = pkg_resources.get_distribution('releasetool')
+            path = os.path.join(distribution.location, path)
 
         return path
 
@@ -53,7 +51,7 @@ class ApplicationConfig(obsah.ApplicationConfig):
         """
         Return the inventory path
         """
-        return os.environ.get('OBAL_INVENTORY', os.path.join(os.getcwd(), 'releasetool.yaml'))
+        return os.path.join(os.getcwd(), 'releasetool.yaml')
 
 
 def main(cliargs=None, application_config=ApplicationConfig):  # pylint: disable=R0914
