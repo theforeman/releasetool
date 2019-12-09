@@ -33,13 +33,6 @@ class ApplicationConfig(obsah.ApplicationConfig):
         return 'projects'
 
     @staticmethod
-    def metadata_name():
-        """
-        Return the name of the metadata file.
-        """
-        return 'metadata.obal.yaml'
-
-    @staticmethod
     def data_path():
         """
         Return the data path. Houses playbooks and configs.
