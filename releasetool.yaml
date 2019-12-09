@@ -8,6 +8,9 @@ projects:
     rpm_packages: []
     koji_tags: []
     artifact_strategy: 'rake'
+    keys:
+      '1.23': '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
+      '1.24': 'D885D3D9B12FA857CDECE3F1B76498E45AA9BCAD'
 
 
   children:
@@ -16,23 +19,6 @@ projects:
     client: {}
     pulp: {}
     keys: {}
-
-keys:
-  children:
-    key_1_23:
-      vars:
-        gpg_key: '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
-      hosts:
-        foreman-1.23: {}
-        client-1.23: {}
-        katello-3.13: {}
-    key_1_24:
-      vars:
-        gpg_key: 'D885D3D9B12FA857CDECE3F1B76498E45AA9BCAD'
-      hosts:
-        foreman-1.24: {}
-        client-1.24: {}
-        katello-3.14: {}
 
 foreman:
   vars:
