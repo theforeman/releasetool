@@ -26,6 +26,13 @@ keys:
         foreman-1.23: {}
         client-1.23: {}
         katello-3.13: {}
+    key_1_24:
+      vars:
+        gpg_key: 'D885D3D9B12FA857CDECE3F1B76498E45AA9BCAD'
+      hosts:
+        foreman-1.24: {}
+        client-1.24: {}
+        katello-3.14: {}
 
 foreman:
   vars:
@@ -48,8 +55,10 @@ foreman:
   hosts:
     foreman-1.23:
       version: '1.23'
-      full_version: '1.23.0'
-
+      full_version: '1.23.1'
+    foreman-1.24:
+      version: '1.24'
+      full_version: '1.24.0-RC3'
 
 katello:
   vars:
@@ -65,22 +74,36 @@ katello:
     katello-3.13:
       foreman_version: '1.23'
       version: '3.13'
-      full_version: '3.13.0'
+      full_version: '3.13.3'
+    katello-3.14:
+      foreman_version: '1.24'
+      version: '3.14'
+      full_version: '3.14.0-RC2'
 
 client:
   vars:
-    operating_systems:
-      - rhel5
-      - rhel6
-      - rhel7
-      - sles11
-      - sles12
-      - fedora28
-      - fedora29
     koji_tags:
       - "foreman-client-{{ version }}-{{ os_version }}"
   hosts:
     client-1.23:
       version: '1.23'
-      full_version: '1.23.0'
+      full_version: '1.23.1'
+      operating_systems:
+        - rhel5
+        - rhel6
+        - rhel7
+        - sles11
+        - sles12
+        - fedora28
+        - fedora29
+    client-1.24:
+      version: '1.24'
+      full_version: '1.24.0-RC3'
+      operating_systems:
+        - rhel5
+        - rhel6
+        - rhel7
+        - sles11
+        - sles12
+        - fedora29
 ...
