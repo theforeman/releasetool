@@ -8,8 +8,6 @@ projects:
     rpm_packages: []
     koji_tags: []
     artifact_strategy: 'rake'
-    pass_name_gpg: "theforeman/releases/foreman/{{ foreman_version }}-gpg"
-    pass_name_key: "theforeman/releases/foreman/{{ foreman_version }}-key"
 
 
   children:
