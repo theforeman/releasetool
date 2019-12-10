@@ -1,0 +1,16 @@
+usage: releasetool import-gpg-private [-h] [-v] [-e EXTRA_VARS]
+                                      target [target ...]
+
+import gpg private keys to be used for signing
+
+positional arguments:
+  target                the target to execute the action against
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         verbose output
+
+advanced arguments:
+  -e EXTRA_VARS, --extra-vars EXTRA_VARS
+                        set additional variables as key=value or YAML/JSON, if
+                        filename prepend with @

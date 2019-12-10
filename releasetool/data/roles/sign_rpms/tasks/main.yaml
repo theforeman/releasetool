@@ -1,0 +1,11 @@
+---
+- name: find rpms to sign
+  find:
+    path: "{{ work_dir_rpm }}"
+    patterns: "*.rpm"
+  register: rpms_to_sign
+
+- name: sign rpms
+  command: "rpmsign --addsign --define '_gpg_path {{ work_dir_gpg }}' --define '_gpg_name {{ signer }}' {{ item.path }}"
+  loop: "{{ rpms_to_sign.files }}"
+...

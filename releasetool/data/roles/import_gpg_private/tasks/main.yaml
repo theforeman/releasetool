@@ -1,0 +1,3 @@
+---
+- name: import gpg key
+  shell: "gopass show '{{ pass_name_key }}' | gpg2 --homedir '{{ work_dir_gpg }}' --import"

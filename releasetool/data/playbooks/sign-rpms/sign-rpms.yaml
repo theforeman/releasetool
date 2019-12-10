@@ -1,0 +1,8 @@
+---
+- hosts:
+    - projects
+  connection: local
+  gather_facts: false
+  roles:
+    - download_rpms
+    - sign_rpms

@@ -1,0 +1,3 @@
+dependencies:
+  - role: release_environment
+  - role: load_gpg_passphrase
