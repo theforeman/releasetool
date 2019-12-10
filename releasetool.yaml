@@ -7,7 +7,7 @@ projects:
     tar_projects: []
     rpm_packages: []
     koji_tags: []
-    artifact_strategy: 'rake'
+    source_strategy: 'rake'
     keys:
       '1.23': '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
       '1.24': 'D885D3D9B12FA857CDECE3F1B76498E45AA9BCAD'
@@ -52,7 +52,7 @@ katello:
       - katello
       - katello-repos
       - rubygem-katello
-    artifact_strategy: 'gem'
+    source_strategy: 'gem'
     koji_tags:
       - "katello-{{ version }}-{{ os_version }}"
       - "katello-{{ version }}-thirdparty-candlepin-{{ os_version }}"

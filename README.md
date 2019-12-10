@@ -37,9 +37,9 @@ The general usage of the tool is to call `releasetool ACTION PROJECT-VERSION`. E
 
 This action will take the source code from Git and generate release tarballs and Ruby gems that can be uploaded.
 
-To generate the Foreman 1.23.0 tarballs, execute `releasetool build-artifacts foreman-1.23`
+To generate the Foreman 1.23.0 tarballs, execute `releasetool build-source foreman-1.23`
 
-To generate the Katello 3.13.0 gem, execute `releasetool build-artifacts katello-3.13`
+To generate the Katello 3.13.0 gem, execute `releasetool build-source katello-3.13`
 
 ### Signing RPMs
 
