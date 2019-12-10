@@ -1,4 +1,4 @@
-usage: releasetool sign_rpms [-h] [-v] [-e EXTRA_VARS] target [target ...]
+usage: releasetool sign-rpms [-h] [-v] [-e EXTRA_VARS] target [target ...]
 
 download, sign and upload RPMs
 
