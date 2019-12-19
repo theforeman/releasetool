@@ -1,0 +1,13 @@
+usage: releasetool setup [-h] [-v] [-e EXTRA_VARS]
+
+This action installs packages required for proper releasetool usage on your machine.
+It also configures gopass to work with the shared Foreman password stores.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         verbose output
+
+advanced arguments:
+  -e EXTRA_VARS, --extra-vars EXTRA_VARS
+                        set additional variables as key=value or YAML/JSON, if
+                        filename prepend with @

@@ -1,0 +1,48 @@
+---
+- hosts:
+    - localhost
+  tasks:
+    - name: install dependencies
+      become: yes
+      package:
+        name:
+          - gnupg2
+          - python3
+          - python3-jenkins
+        state: present
+
+    - name: add gopass copr
+      become: yes
+      yum_repository:
+        name: daftaupe-gopass
+        description: Copr repo for gopass owned by daftaupe
+        baseurl: https://copr-be.cloud.fedoraproject.org/results/daftaupe/gopass/{{ (ansible_distribution == 'Fedora') | ternary('fedora', 'epel') }}-{{ ansible_distribution_major_version }}-$basearch/  # noqa 204
+        skip_if_unavailable: True
+        gpgcheck: yes
+        gpgkey: https://copr-be.cloud.fedoraproject.org/results/daftaupe/gopass/pubkey.gpg
+        enabled: yes
+      when:
+        - ansible_os_family == 'RedHat'
+
+    - name: install gopass
+      become: yes
+      package:
+        name: gopass
+        state: present
+      when:
+        - ansible_os_family == 'RedHat'
+
+    - name: gopass init
+      command: gopass init
+      args:
+        creates: "{{ ansible_env.HOME }}/.password-store"
+
+    - name: clone gopass stores
+      command: gopass clone --sync gitcli {{ item.url }} {{ item.name }}
+      args:
+        creates: "{{ ansible_env.HOME }}/.password-store-{{ item.name | replace('/', '-') }}"
+      loop:
+        - url: puppetmaster.theforeman.org:/srv/secretsgit/theforeman-release.git
+          name: theforeman/releases
+        - url: puppetmaster.theforeman.org:/srv/secretsgit/theforeman-passwords.git
+          name: theforeman/shared
