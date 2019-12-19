@@ -1,0 +1,3 @@
+help: |
+  This action installs packages required for proper releasetool usage on your machine.
+  It also configures gopass to work with the shared Foreman password stores.
