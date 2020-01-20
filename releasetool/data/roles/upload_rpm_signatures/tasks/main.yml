@@ -1,0 +1,21 @@
+---
+- name: find rpms to upload signatures for
+  find:
+    path: "{{ work_dir_rpm }}"
+    patterns: "*.rpm"
+  register: rpms_to_sign
+
+- name: upload signatures
+  command: "koji import-sig {{ item }}"
+  loop: "{{ rpms_to_sign.files | map(attribute='path') | sort | batch(batch_size) | map('join', ' ') | list }}"
+
+- name: find srpms
+  find:
+    path: "{{ work_dir_rpm }}"
+    patterns: "*.src.rpm"
+  register: srpms
+
+- name: upload signatures
+  command: "koji write-signed-rpm {{ gpg_id }} {{ item }}"
+  loop: "{{ srpms.files | map(attribute='path') | map('basename') | map('replace', '.src.rpm', '') | sort | batch(batch_size) | map('join', ' ') | list }}"
+...

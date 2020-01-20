@@ -16,8 +16,6 @@ MOCKBIN_DIR = os.path.join(FIXTURE_DIR, 'mockbin')
 MOCK_SOURCES_DIR = os.path.join(FIXTURE_DIR, 'mock_sources')
 
 DEFAULT_ARGS = []
-if os.environ.get('TRAVIS', None):
-    DEFAULT_ARGS.extend(['-e', 'ansible_remote_tmp=/tmp/ansible-remote'])
 
 
 def obal_cli_test(func=None):
@@ -74,3 +72,23 @@ def assert_mockbin_log(content):
 @obal_cli_test()
 def test_obal_noargs():
     assert_obal_failure([])
+
+
+@obal_cli_test()
+def test_releasetool_signrpm():
+    assert_obal_success(['sign-rpms', 'client-1.24'])
+    expected_log = [
+        "koji list-tagged --latest --quiet --inherit --sigs --arch=src foreman-client-1.24-rhel5",
+        "koji download-build --debuginfo ansible-collection-theforeman-foreman-0.4.0-1.el5",
+        "koji list-tagged --latest --quiet --inherit --sigs --arch=src foreman-client-1.24-rhel6",
+        "koji download-build --debuginfo ansible-collection-theforeman-foreman-0.4.0-1.el6",
+        "koji list-tagged --latest --quiet --inherit --sigs --arch=src foreman-client-1.24-rhel7",
+        "koji download-build --debuginfo ansible-collection-theforeman-foreman-0.4.0-1.el7",
+        "gopass show -c theforeman/releases/foreman/1.24-gpg",
+        "rpmsign --addsign --define '_gpg_path {pwd}/releases/client-1.24/gnupg' --define '_gpg_name packages@theforeman.org' {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el5.noarch.rpm {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el5.src.rpm {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el6.noarch.rpm {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el6.src.rpm {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el7.noarch.rpm",
+        "rpmsign --addsign --define '_gpg_path {pwd}/releases/client-1.24/gnupg' --define '_gpg_name packages@theforeman.org' {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el7.src.rpm",
+        "koji import-sig {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el5.noarch.rpm {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el5.src.rpm {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el6.noarch.rpm {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el6.src.rpm {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el7.noarch.rpm",
+        "koji import-sig {pwd}/releases/client-1.24/rpms/ansible-collection-theforeman-foreman-0.4.0-1.el7.src.rpm",
+        "koji write-signed-rpm 5aa9bcad ansible-collection-theforeman-foreman-0.4.0-1.el5 ansible-collection-theforeman-foreman-0.4.0-1.el6 ansible-collection-theforeman-foreman-0.4.0-1.el7",
+    ]
+    assert_mockbin_log(expected_log)
