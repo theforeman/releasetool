@@ -68,6 +68,7 @@ katello:
 
 client:
   vars:
+    foreman_version: "{{ version }}"
     koji_tags:
       - "foreman-client-{{ version }}-{{ os_version }}"
   hosts:
