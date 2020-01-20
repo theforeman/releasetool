@@ -2,6 +2,7 @@
 - name: list {{ os_version }} RPMs from Koji
   command: koji list-tagged --latest --quiet --inherit --sigs --arch=src {{ item }}
   register: koji_list
+  changed_when: False
   loop: "{{ koji_tags }}"
 
 - name: filter koji result
