@@ -6,3 +6,4 @@ gpg_key: "{{ keys[foreman_version] }}"
 gpg_id: "{{ gpg_key[-8:] | lower }}"
 pass_name_gpg: "theforeman/releases/foreman/{{ foreman_version }}-gpg"
 pass_name_key: "theforeman/releases/foreman/{{ foreman_version }}-key"
+batch_size: 5

@@ -6,3 +6,4 @@
   roles:
     - download_rpms
     - sign_rpms
+    - upload_rpm_signatures

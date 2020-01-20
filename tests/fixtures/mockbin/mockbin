@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import os
+import sys
+import argparse
+try:
+    from pipes import quote
+except ImportError:
+    from shlex import quote
+
+
+_FAKE_TAGGED = """ ansible-collection-theforeman-foreman-0.4.0-1.{dist}.src
+ foreman-release-1.24.1-1.{dist}.src
+ gofer-2.12.5-3.{dist}.src
+ katello-host-tools-3.5.1-2.{dist}.src
+ python-apypie-0.2.1-1.{dist}.src
+ rubygem-foreman_scap_client-0.4.6-1.{dist}.src
+2c7e5d9a gofer-2.12.5-3.{dist}.src
+5aa9bcad foreman-release-1.24.1-1.{dist}.src
+5aa9bcad gofer-2.12.5-3.{dist}.src
+5aa9bcad katello-host-tools-3.5.1-2.{dist}.src
+5aa9bcad python-apypie-0.2.1-1.{dist}.src
+5aa9bcad rubygem-foreman_scap_client-0.4.6-1.{dist}.src
+7b5b366a gofer-2.12.5-3.{dist}.src
+7b5b366a rubygem-foreman_scap_client-0.4.6-1.{dist}.src
+b36987a9 gofer-2.12.5-3.{dist}.src
+b36987a9 rubygem-foreman_scap_client-0.4.6-1.{dist}.src
+"""
+
+prog = os.path.basename(sys.argv[0])
+sys.argv[0] = prog
+
+mockbin_log = os.environ.get('MOCKBIN_LOG', None)
+
+if mockbin_log:
+    with open(mockbin_log, 'a') as logfile:
+        logline = ' '.join([quote(entry) for entry in sys.argv])
+        logfile.write("%s\n" % (logline))
+
+if prog == 'gopass':
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest='command')
+    parser_show = subparsers.add_parser('show')
+    parser_show.add_argument('key')
+    parser_show.add_argument('-c', action='store_true')
+    args = parser.parse_args()
+    if 'key' in args:
+        print(args.key)
+elif prog in ['koji', 'brew']:
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest='command')
+    parser_listtagged = subparsers.add_parser('list-tagged')
+    parser_listtagged.add_argument('tag')
+    parser_listtagged.add_argument('--arch')
+    parser_listtagged.add_argument('--sigs', action='store_true')
+    parser_listtagged.add_argument('--inherit', action='store_true')
+    parser_listtagged.add_argument('--quiet', action='store_true')
+    parser_listtagged.add_argument('--latest', action='store_true')
+    parser_downloadbuild = subparsers.add_parser('download-build')
+    parser_downloadbuild.add_argument('buildid')
+    parser_downloadbuild.add_argument('--debuginfo', action='store_true')
+    parser_importsig = subparsers.add_parser('import-sig')
+    parser_importsig.add_argument('rpm', nargs='+')
+    parser_writesignedrpm = subparsers.add_parser('write-signed-rpm')
+    parser_writesignedrpm.add_argument('key')
+    parser_writesignedrpm.add_argument('build', nargs='+')
+
+    args = parser.parse_args()
+
+    if args.command == 'download-build':
+        for arch in ['src', 'noarch']:
+            with open('{}.{}.rpm'.format(args.buildid, arch), 'w') as f:
+                f.write(args.buildid)
+    elif args.command == 'list-tagged':
+        dist = args.tag.split('-')[-1]
+        if dist.startswith('rhel'):
+            dist = dist.replace('rhel', 'el')
+        elif dist.startswith('fedora'):
+            dist = dist.replace('fedora', 'f')
+        print(_FAKE_TAGGED.format(dist=dist))
+
+elif prog == 'rpmsign':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('rpm')
+    parser.add_argument('--addsign', action='store_true')
+    parser.add_argument('--define', action='append')
