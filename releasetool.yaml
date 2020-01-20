@@ -44,7 +44,7 @@ foreman:
       full_version: '1.23.1'
     foreman-1.24:
       version: '1.24'
-      full_version: '1.24.0-RC3'
+      full_version: '1.24.1'
 
 katello:
   vars:
@@ -64,7 +64,7 @@ katello:
     katello-3.14:
       foreman_version: '1.24'
       version: '3.14'
-      full_version: '3.14.0-RC2'
+      full_version: '3.14.1'
 
 client:
   vars:
@@ -84,7 +84,7 @@ client:
         - fedora29
     client-1.24:
       version: '1.24'
-      full_version: '1.24.0-RC3'
+      full_version: '1.24.1'
       operating_systems:
         - rhel5
         - rhel6
