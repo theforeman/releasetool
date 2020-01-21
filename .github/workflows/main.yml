@@ -24,3 +24,16 @@ jobs:
         run: pip install -r requirements-test.txt
       - name: Run tests
         run: tox
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.7'
+      - name: Install dependencies
+        run: pip install tox
+      - name: Run tests
+        run: tox -e ansible-lint
