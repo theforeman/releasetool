@@ -92,3 +92,15 @@ def test_releasetool_signrpm():
         "koji write-signed-rpm 5aa9bcad ansible-collection-theforeman-foreman-0.4.0-1.el5 ansible-collection-theforeman-foreman-0.4.0-1.el6 ansible-collection-theforeman-foreman-0.4.0-1.el7",
     ]
     assert_mockbin_log(expected_log)
+
+@obal_cli_test()
+def test_releasetool_signtar():
+    assert_obal_success(['sign-tarballs', 'foreman-1.24'])
+    expected_log = [
+        "gopass show -c theforeman/releases/foreman/1.24-gpg",
+        "gpg2 --homedir {pwd}/releases/foreman-1.24/gnupg --detach-sign --local-user packages@theforeman.org {pwd}/releases/foreman-1.24/tarballs/foreman-1.24.1.tar.bz2",
+        "gpg2 --homedir {pwd}/releases/foreman-1.24/gnupg --detach-sign --local-user packages@theforeman.org {pwd}/releases/foreman-1.24/tarballs/foreman-proxy-1.24.1.tar.bz2",
+        "gpg2 --homedir {pwd}/releases/foreman-1.24/gnupg --detach-sign --local-user packages@theforeman.org {pwd}/releases/foreman-1.24/tarballs/foreman-installer-1.24.1.tar.bz2",
+        "gpg2 --homedir {pwd}/releases/foreman-1.24/gnupg --detach-sign --local-user packages@theforeman.org {pwd}/releases/foreman-1.24/tarballs/foreman-selinux-1.24.1.tar.bz2",
+    ]
+    assert_mockbin_log(expected_log)
