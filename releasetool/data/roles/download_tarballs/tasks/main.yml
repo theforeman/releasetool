@@ -1,0 +1,7 @@
+---
+- name: "Download tarballs"
+  get_url:
+    url: "https://downloads.theforeman.org/{{ item }}/{{ item }}-{{ full_version }}.tar.bz2"
+    dest: "{{ work_dir_tarballs }}"
+  loop: "{{ tar_projects }}"
+...

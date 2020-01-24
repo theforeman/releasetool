@@ -8,6 +8,7 @@
     - "{{ work_dir }}"
     - "{{ work_dir_rpm }}"
     - "{{ work_dir_gpg }}"
+    - "{{ work_dir_tarballs }}"
 
 - name: ensure {{ work_dir_rpm }}
   file:

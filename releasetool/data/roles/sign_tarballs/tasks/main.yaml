@@ -1,0 +1,5 @@
+---
+- name: sign tarballs
+  command:  "gpg2 --homedir '{{ work_dir_gpg }}' --detach-sign --local-user '{{ signer }}' '{{ work_dir_tarballs }}/{{ item }}-{{ full_version }}.tar.bz2'"
+  loop: "{{ tar_projects }}"
+...
