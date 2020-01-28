@@ -1,0 +1,9 @@
+---
+- name: "Upload signatures"
+  copy:
+    src: "{{ work_dir_tarballs }}/{{ item }}-{{ full_version }}.tar.bz2.sig"
+    dest: "{{ source_docroot }}/{{ item }}/{{ item }}-{{ full_version }}.tar.bz2.sig"
+  loop: "{{ tar_projects }}"
+  delegate_to: source_storage
+  become: true
+...

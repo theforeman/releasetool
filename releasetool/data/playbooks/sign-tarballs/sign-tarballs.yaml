@@ -6,3 +6,4 @@
   roles:
     - download_tarballs
     - sign_tarballs
+    - upload_tarball_signatures
