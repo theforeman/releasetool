@@ -1,4 +1,9 @@
 ---
+all:
+  hosts:
+    source_storage:
+      ansible_host: web.example.com
+
 projects:
   vars:
     operating_systems:
@@ -22,6 +27,7 @@ projects:
 foreman:
   vars:
     foreman_version: "{{ version }}"
+    source_docroot: "/var/www/vhosts/downloads/htdocs"
     tar_projects:
       - foreman
       - foreman-proxy
