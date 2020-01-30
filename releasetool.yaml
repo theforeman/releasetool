@@ -3,6 +3,7 @@ all:
   hosts:
     source_storage:
       ansible_host: web02.theforeman.org
+      ansible_connection: ssh
 
 projects:
   vars:

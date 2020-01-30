@@ -3,6 +3,8 @@ all:
   hosts:
     source_storage:
       ansible_host: web.example.com
+      # the real config uses ssh, but we don't want to run stuff via ssh during tests
+      ansible_connection: local
 
 projects:
   vars:
@@ -27,7 +29,8 @@ projects:
 foreman:
   vars:
     foreman_version: "{{ version }}"
-    source_docroot: "/var/www/vhosts/downloads/htdocs"
+    source_docroot: "{{ work_dir }}/tests/htdocs"
+    source_upload_requires_become: false
     tar_projects:
       - foreman
       - foreman-proxy
