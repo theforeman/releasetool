@@ -15,7 +15,7 @@
     patterns: "*.src.rpm"
   register: srpms
 
-- name: upload signatures
+- name: upload signed rpms
   command: "koji write-signed-rpm {{ gpg_id }} {{ item }}"
   loop: "{{ srpms.files | map(attribute='path') | map('basename') | map('replace', '.src.rpm', '') | sort | batch(batch_size) | map('join', ' ') | list }}"
 ...

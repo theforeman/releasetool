@@ -17,6 +17,7 @@ projects:
     keys:
       '1.23': '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
       '1.24': 'D885D3D9B12FA857CDECE3F1B76498E45AA9BCAD'
+      '2.0': '06ABEFE26C1997E0C9E56508926EA0100579BAEE'
 
 
   children:
@@ -52,6 +53,9 @@ foreman:
     foreman-1.24:
       version: '1.24'
       full_version: '1.24.1'
+    foreman-2.0:
+      version: '2.0'
+      full_version: '2.0.0-rc3'
 
 katello:
   vars:
@@ -72,6 +76,10 @@ katello:
       foreman_version: '1.24'
       version: '3.14'
       full_version: '3.14.1'
+    katello-3.15:
+      foreman_version: '2.0'
+      version: '3.15'
+      full_version: '3.15.0'
 
 client:
   vars:
@@ -97,6 +105,17 @@ client:
         - rhel5
         - rhel6
         - rhel7
+        - sles11
+        - sles12
+        - fedora29
+    client-2.0:
+      version: '2.0'
+      full_version: '2.0.0'
+      operating_systems:
+        - rhel5
+        - rhel6
+        - rhel7
+        - el8
         - sles11
         - sles12
         - fedora29
