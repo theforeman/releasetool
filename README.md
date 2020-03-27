@@ -33,6 +33,16 @@ Each project can later define their own, project-specific, settings. The last le
 
 The general usage of the tool is to call `releasetool ACTION PROJECT-VERSION`. Executing actions against the unversioned project definitions is not supported.
 
+If at any step the system asks you for the password to a GPG key, use crtl+v to paste the secret that was copied automatically to the clipboard.
+
+### Import GPG Key
+
+Before running most actions the associated GPG key will need to be imported. Example:
+
+```
+releasetool import-gpg-private foreman-2.0
+```
+
 ### Generating release tarballs and Ruby gems
 
 This action will take the source code from Git and generate release tarballs and Ruby gems that can be uploaded.
