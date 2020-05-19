@@ -9,6 +9,7 @@ projects:
   vars:
     operating_systems:
       - rhel7
+      - el8
     signer: packages@theforeman.org
     tar_projects: []
     rpm_packages: []
@@ -18,6 +19,7 @@ projects:
       '1.23': '4674C97BD8C2A3EF63BCB20788BB5C467B5B366A'
       '1.24': 'D885D3D9B12FA857CDECE3F1B76498E45AA9BCAD'
       '2.0': '06ABEFE26C1997E0C9E56508926EA0100579BAEE'
+      '2.1': '0F71D9EAC889A0F2C2CD8190628005A4B6F08CCF'
 
 
   children:
@@ -50,12 +52,21 @@ foreman:
     foreman-1.23:
       version: '1.23'
       full_version: '1.23.1'
+      operating_systems:
+        - rhel7
     foreman-1.24:
       version: '1.24'
       full_version: '1.24.1'
+      operating_systems:
+        - rhel7
     foreman-2.0:
       version: '2.0'
       full_version: '2.0.0-rc3'
+      operating_systems:
+        - rhel7
+    foreman-2.1:
+      version: '2.1'
+      full_version: '2.1.0-rc1'
 
 katello:
   vars:
@@ -72,14 +83,24 @@ katello:
       foreman_version: '1.23'
       version: '3.13'
       full_version: '3.13.3'
+      operating_systems:
+        - rhel7
     katello-3.14:
       foreman_version: '1.24'
       version: '3.14'
       full_version: '3.14.1'
+      operating_systems:
+        - rhel7
     katello-3.15:
       foreman_version: '2.0'
       version: '3.15'
       full_version: '3.15.0'
+      operating_systems:
+        - rhel7
+    katello-3.16:
+      foreman_version: '2.1'
+      version: '3.16'
+      full_version: '3.16.0'
 
 client:
   vars:
@@ -119,4 +140,14 @@ client:
         - sles11
         - sles12
         - fedora29
+    client-2.1:
+      version: '2.1'
+      full_version: '2.1.0'
+      operating_systems:
+        - rhel5
+        - rhel6
+        - rhel7
+        - el8
+        - sles11
+        - sles12
 ...
