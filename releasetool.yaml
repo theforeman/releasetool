@@ -46,24 +46,34 @@ foreman:
       - foreman-selinux
     koji_tags:
       - "foreman-{{ version }}-{{ os_version }}"
-      - "foreman-{{ version }}-nonscl-{{ os_version }}"
-      - "foreman-rails-{{ version }}-{{ os_version }}"
+      - "foreman-{{ version }}-nonscl-rhel7"
   hosts:
     foreman-1.23:
       version: '1.23'
       full_version: '1.23.2'
       operating_systems:
         - rhel7
+      koji_tags:
+        - "foreman-{{ version }}-{{ os_version }}"
+        - "foreman-{{ version }}-nonscl-{{ os_version }}"
+        - "foreman-rails-{{ version }}-{{ os_version }}"
     foreman-1.24:
       version: '1.24'
       full_version: '1.24.3'
       operating_systems:
         - rhel7
+      koji_tags:
+        - "foreman-{{ version }}-{{ os_version }}"
+        - "foreman-{{ version }}-nonscl-{{ os_version }}"
+        - "foreman-rails-{{ version }}-{{ os_version }}"
     foreman-2.0:
       version: '2.0'
       full_version: '2.0.0'
       operating_systems:
         - rhel7
+      koji_tags:
+        - "foreman-{{ version }}-{{ os_version }}"
+        - "foreman-{{ version }}-nonscl-{{ os_version }}"
     foreman-2.1:
       version: '2.1'
       full_version: '2.1.0-rc1'
