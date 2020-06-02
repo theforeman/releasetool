@@ -87,7 +87,10 @@ katello:
     source_strategy: 'gem'
     koji_tags:
       - "katello-{{ version }}-{{ os_version }}"
-      - "katello-{{ version }}-thirdparty-candlepin-{{ os_version }}"
+      - "katello-{{ version }}-thirdparty-candlepin-rhel7"
+      - "katello-candlepin-{{ version }}-el8"
+      - "katello-pulpcore-{{ version }}-el7"
+      - "katello-pulpcore-{{ version }}-el8"
   hosts:
     katello-3.13:
       foreman_version: '1.23'
@@ -95,18 +98,28 @@ katello:
       full_version: '3.13.3'
       operating_systems:
         - rhel7
+      koji_tags:
+        - "katello-{{ version }}-{{ os_version }}"
+        - "katello-{{ version }}-thirdparty-candlepin-{{ os_version }}"
     katello-3.14:
       foreman_version: '1.24'
       version: '3.14'
       full_version: '3.14.1'
       operating_systems:
         - rhel7
+      koji_tags:
+        - "katello-{{ version }}-{{ os_version }}"
+        - "katello-{{ version }}-thirdparty-candlepin-{{ os_version }}"
     katello-3.15:
       foreman_version: '2.0'
       version: '3.15'
       full_version: '3.15.0'
       operating_systems:
         - rhel7
+      koji_tags:
+        - "katello-{{ version }}-{{ os_version }}"
+        - "katello-{{ version }}-thirdparty-candlepin-{{ os_version }}"
+        - "katello-pulpcore-{{ version }}-el7"
     katello-3.16:
       foreman_version: '2.1'
       version: '3.16'
