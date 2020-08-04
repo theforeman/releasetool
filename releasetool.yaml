@@ -20,6 +20,7 @@ projects:
       '1.24': 'D885D3D9B12FA857CDECE3F1B76498E45AA9BCAD'
       '2.0': '06ABEFE26C1997E0C9E56508926EA0100579BAEE'
       '2.1': '0F71D9EAC889A0F2C2CD8190628005A4B6F08CCF'
+      '2.2': '939E2FD66DF9A4104869FD182A63B068C7C509FA'
 
 
   children:
@@ -77,6 +78,9 @@ foreman:
     foreman-2.1:
       version: '2.1'
       full_version: '2.1.0-rc1'
+    foreman-2.2:
+      version: '2.2'
+      full_version: '2.2.0-rc1'
 
 katello:
   vars:
@@ -166,6 +170,16 @@ client:
     client-2.1:
       version: '2.1'
       full_version: '2.1.0'
+      operating_systems:
+        - rhel5
+        - rhel6
+        - rhel7
+        - el8
+        - sles11
+        - sles12
+    client-2.2:
+      version: '2.2'
+      full_version: '2.2.0'
       operating_systems:
         - rhel5
         - rhel6
